@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://be1t02laukox"]
+
+[ext_resource type="Script" path="res://piece_slot.gd" id="1_h0no5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rd3t3"]
+size = Vector3(1.95959, 0.846619, 2.03113)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o58pf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hx0sf"]
+albedo_color = Color(0.23904, 0.0648, 0.54, 1)
+
+[node name="PieceSlot" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522369, 8.62907)
+script = ExtResource("1_h0no5")
+
+[node name="PieceSlotArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PieceSlotArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0172729, 0.371551, 0.00994873)
+shape = SubResource("BoxShape3D_rd3t3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_o58pf")
+surface_material_override/0 = SubResource("StandardMaterial3D_hx0sf")
+
+[connection signal="area_exited" from="PieceSlotArea" to="." method="_on_piece_slot_area_exited"]
